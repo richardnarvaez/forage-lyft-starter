@@ -19,14 +19,16 @@ class TestNubbinBattery(unittest.TestCase):
 
 class TestSpindlerBattery(unittest.TestCase):
     def test_needs_service_true(self):
+        # > 3y -> True
         current_date = datetime(2024, 2, 18)
-        last_service_date = datetime(2020, 4, 20)
+        last_service_date = datetime(2021, 2, 17)
         battery = SpindlerBattery(current_date, last_service_date)
         self.assertTrue(battery.needs_service())
 
     def test_needs_service_false(self):
+        # <=3y -> False
         current_date = datetime(2024, 2, 18)
-        last_service_date = datetime(2023,2, 19)
+        last_service_date = datetime(2021, 2, 18)
         battery = SpindlerBattery(current_date, last_service_date)
         self.assertFalse(battery.needs_service())
 
